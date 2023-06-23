@@ -1,0 +1,39 @@
+<section id="intro-section" class="home-intro-section text-center" [ngStyle]="{'background': 'url(' + bgImage + ') no-repeat center center', 'background-size': 'cover'}">
+  <div class="background-layer-soft">
+    <div class="container" [ngClass]="{'extended': options.componentType === 'titleExtended'}">
+
+      <div class="component-title-container">
+        <div *ngIf="subtitle" class="home-intro-subtitle"> {{ subtitle }} </div>
+        <h1 *ngIf="title" class="home-intro-title">{{ title }}</h1>
+        <p *ngIf="text" class="home-intro-text"> {{ text }}</p>
+
+        <button *ngIf="button" mat-raised-button mat-lg-button class="button" (click)="buttonClick()">
+          <mat-icon>{{ button.icon }}</mat-icon>
+          {{ button.text }}
+        </button>
+
+        <div *ngIf="titleImage" class="intro-product">
+          <img [src]="titleImage" alt="Imagen de título">
+        </div>
+      </div>
+
+      <div *ngIf="(options.componentType === 'titleExtended') && items && items.length" class="content-container">
+          <div *ngFor="let item of items" class="item-container" [ngClass]="{'solid': options.style === 'solid'}">
+              <div *ngIf="options.iconType === 'image'" class="image-container">
+                  <img src="{{item.img.src}}" alt="{{item.img.alt}}">
+              </div>
+              <div *ngIf="options.iconType === 'icon'" class="icon-container">
+                <mat-icon color="accent">{{item.icon}}</mat-icon>
+              </div>
+              <div class="item-content">
+                <div class="title-container">{{ item.title[lang] }}</div>
+                <div class="text-container">
+                  <p>{{ item.description[lang] }}</p>
+                </div>
+              </div>
+          </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
